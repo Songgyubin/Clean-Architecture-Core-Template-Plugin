@@ -1,3 +1,4 @@
+import org.gradle.internal.os.OperatingSystem
 import org.jetbrains.changelog.Changelog
 import org.jetbrains.changelog.markdownToHTML
 
@@ -32,10 +33,18 @@ kotlin {
 }
 
 // Configure Gradle IntelliJ Plugin - read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
+// Configure Gradle IntelliJ Plugin - read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
     pluginName = properties("pluginName")
-    version = properties("platformVersion")
+    // version 주석 처리 혹은 삭제
+//    version = properties("platformVersion")
     type = properties("platformType")
+    // localPath 추가
+    if (OperatingSystem.current().isMacOsX) {
+        localPath.set(properties("androidStudioPathMacOS"))
+    } else {
+        localPath.set(properties("androidStudioPathWindows"))
+    }
 
     // Plugin Dependencies. Uses `platformPlugins` property from the gradle.properties file.
     plugins = properties("platformPlugins").map { it.split(',').map(String::trim).filter(String::isNotEmpty) }
