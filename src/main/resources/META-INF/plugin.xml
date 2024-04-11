@@ -1,18 +1,38 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>com.github.songgyubin.cleanarchitecturecoretemplateplugin</id>
-    <name>Clean-Architecture-Core-Template-Plugin</name>
-    <vendor>songgyubin</vendor>
+
+    <name>Clean Architecture Core Generator</name>
+
+    <vendor email="thd0427@gmail.com">Song Gyu bin</vendor>
+
+    <version>1.0.0</version>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends>org.jetbrains.kotlin</depends>
+    <depends>com.intellij.modules.java</depends>
+    <depends>org.jetbrains.android</depends>
+    <depends>com.intellij.modules.androidstudio</depends>
+
+    <description><![CDATA[
+    <p><strong>Clean Architecture Core Generator</strong> is a plugin for generating clean architecture data and domain layer code. This tool simplifies and streamlines the development process by allowing efficient creation of core components of clean architecture.</p>
+    <p>You can specify a prefix, and the classes and interfaces that can be created in each layer are as follows:</p>
+    <ul>
+        <li><strong>Domain Layer</strong>: Repository (Interface), Entity (Data class), UseCase (Class)</li>
+        <li><strong>Data Layer</strong>: RepositoryImpl (Class), DataSource (Class), DTO (Data Class)</li>
+    </ul>
+    <p>This plugin aids developers in simplifying their workflow and implementing standardized structures with ease.</p>
+]]></description>
 
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.songgyubin.cleanarchitecturecoretemplateplugin.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
+        <toolWindow factoryClass="com.github.songgyubin.cleanarchitecturecoretemplateplugin.toolWindow.MyToolWindowFactory" id="MyToolWindow" />
     </extensions>
 
-    <applicationListeners>
-        <listener class="com.github.songgyubin.cleanarchitecturecoretemplateplugin.listeners.MyApplicationActivationListener" topic="com.intellij.openapi.application.ApplicationActivationListener"/>
-    </applicationListeners>
+    <extensions defaultExtensionNs="com.android.tools.idea.wizard.template">
+        <wizardTemplateProvider
+            implementation="com.github.songgyubin.cleanarchitecturecoretemplateplugin.wizard.GenerateFileTemplateProvider" />
+    </extensions>
+
 </idea-plugin>
