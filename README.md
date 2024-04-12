@@ -15,6 +15,7 @@ This plugin aims to reduce such redundant tasks, enabling developers to focus mo
 
 접두사를 지정할 수 있으며, 각 레이어에서 생성할 수 있는 클래스와 인터페이스는 다음과 같습니다.
 
+![화면 기록 2024-04-11 오후 5 24 23](https://github.com/Songgyubin/Clean-Architecture-Core-Template-Plugin/assets/37494776/b266fadd-1473-4656-9947-33ada7cadf90)
 <!-- Plugin description end -->
 ### Automating the Data Layer
 - Repository Impl(Class)
@@ -38,9 +39,6 @@ This plugin aims to reduce such redundant tasks, enabling developers to focus mo
 2. `Other`를 클릭하고 `Clean Architecture Core Generator`를 실행합니다.
 3. `Prefix`를 입력하고 생성할 파일을 선택합니다.
 4. 각 파일에 코드를 추가하세요.
-
-![화면 기록 2024-04-11 오후 5 24 23](https://github.com/Songgyubin/Clean-Architecture-Core-Template-Plugin/assets/37494776/b266fadd-1473-4656-9947-33ada7cadf90)
-
 
 ## Installation
 
