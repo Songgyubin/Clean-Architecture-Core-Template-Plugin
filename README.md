@@ -1,5 +1,6 @@
 <!-- Plugin description -->
 # Clean-Architecture-Core-Template-Plugin
+[![Version](https://img.shields.io/jetbrains/plugin/v/24151.svg)](https://plugins.jetbrains.com/plugin/24151)
 
 ### Eng
 This project introduces a plugin designed to minimize repetitive tasks in the Data and Domain Layers when implementing Clean Architecture.
