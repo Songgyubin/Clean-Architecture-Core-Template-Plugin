@@ -4,3 +4,6 @@
 build
 # Local configuration file (sdk path, etc)
 local.properties
+
+# DS_Store
+.DS_Store
