@@ -4,9 +4,9 @@
 
     <name>Clean Architecture Core Generator</name>
 
-    <vendor email="thd0427@gmail.com">Song Gyu bin</vendor>
+    <vendor email="thd0427@gmail.com">Song Gyu Bin</vendor>
 
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 
     <depends>com.intellij.modules.platform</depends>
     <depends>org.jetbrains.kotlin</depends>
@@ -14,14 +14,28 @@
     <depends>org.jetbrains.android</depends>
     <depends>com.intellij.modules.androidstudio</depends>
 
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+        Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+        Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
-    <p><strong>Clean Architecture Core Generator</strong> is a plugin for generating clean architecture data and domain layer code. This tool simplifies and streamlines the development process by allowing efficient creation of core components of clean architecture.</p>
+    <p><strong>Clean Architecture Core Generator</strong> is a plugin for generating clean architecture data and domain layer code.</p>
+    <p>This tool simplifies and streamlines the development process by allowing efficient creation of core components of clean architecture.</p>
     <p>You can specify a prefix, and the classes and interfaces that can be created in each layer are as follows:</p>
     <ul>
         <li><strong>Domain Layer</strong>: Repository (Interface), Entity (Data class), UseCase (Class)</li>
         <li><strong>Data Layer</strong>: RepositoryImpl (Class), DataSource (Class), DTO (Data Class)</li>
     </ul>
     <p>This plugin aids developers in simplifying their workflow and implementing standardized structures with ease.</p>
+
+    <p><strong>Clean Architecture Core Generator</strong>는 클린 아키텍처의 데이터와 도메인 레이어 코드를 생성하기 위한 플러그인입니다.</p>
+    <p>이 플러그인은 클린 아키텍처의 핵심 구성 요소를 효율적으로 생성할 수 있도록 하여 개발 프로세스를 단순화하고 능률화합니다.</p>
+    <p>접두사를 지정할 수 있으며, 각 레이어에서 생성할 수 있는 클래스와 인터페이스는 다음과 같습니다.</p>
+    <ul>
+        <li><strong>Domain Layer</strong>: Repository(Interface), Entity(Data Class), UseCase(Class)</li>
+        <li><strong>Data Layer</strong>: RepositoryImpl(Class), DataSource(Class), DTO(Data Class)</li>
+    </ul>
+    <p>이 플러그인은 개발자가 작업 흐름을 단순화하고 표준화된 구조를 쉽게 구현하는 데 도움이 됩니다.</p>
 ]]></description>
 
     <resource-bundle>messages.MyBundle</resource-bundle>
@@ -31,8 +45,7 @@
     </extensions>
 
     <extensions defaultExtensionNs="com.android.tools.idea.wizard.template">
-        <wizardTemplateProvider
-            implementation="com.github.songgyubin.cleanarchitecturecoretemplateplugin.wizard.GenerateFileTemplateProvider" />
+        <wizardTemplateProvider implementation="com.github.songgyubin.cleanarchitecturecoretemplateplugin.wizard.GenerateFileTemplateProvider" />
     </extensions>
 
 </idea-plugin>
