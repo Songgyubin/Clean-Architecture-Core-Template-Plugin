@@ -46,7 +46,8 @@ This plugin aims to reduce such redundant tasks, enabling developers to focus mo
 
 - Using the IDE built-in plugin system:
 
-  Reviewing for distribution(04/11)
+  ![스크린샷 2024-04-12 오후 7 57 19](https://github.com/Songgyubin/Clean-Architecture-Core-Template-Plugin/assets/37494776/9ff7ed8f-69af-4e50-9bc8-266ffe9c3d2a)
+
   
 - Manually:
 
