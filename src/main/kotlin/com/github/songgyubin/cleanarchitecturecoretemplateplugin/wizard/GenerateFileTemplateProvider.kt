@@ -64,7 +64,6 @@ class GenerateFileTemplateProvider : WizardTemplateProvider() {
                 CheckBoxWidget(generateDataSource),
                 CheckBoxWidget(generateModel),
             )
-//            thumb { File("compose-activity-material3").resolve("template_compose_empty_activity_material3.png") }
         }
 
     /**
@@ -79,7 +78,7 @@ class GenerateFileTemplateProvider : WizardTemplateProvider() {
         val createdFiles = mutableListOf<File>()
 
         val fileDetails = listOf(
-            Triple(generateRepositoryImpl, "${prefix.value}RepositoryImpl.kt", "class ${prefix.value}RepositoryImpl"),
+            Triple(generateRepositoryImpl, "${prefix.value}RepositoryImpl.kt", "class ${prefix.value}RepositoryImpl: ${prefix.value}Repository"),
             Triple(generateDataSource, "${prefix.value}DataSource.kt", "class ${prefix.value}DataSource"),
             Triple(generateModel, "${prefix.value}.kt", "data class ${prefix.value}()"),
             Triple(generateRepository, "${prefix.value}Repository.kt", "interface ${prefix.value}Repository"),
