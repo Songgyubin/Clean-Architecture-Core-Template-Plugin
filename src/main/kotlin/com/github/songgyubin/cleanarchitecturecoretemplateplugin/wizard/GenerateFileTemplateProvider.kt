@@ -30,6 +30,11 @@ import java.io.File
  * @created  2024/04/11
  */
 class GenerateFileTemplateProvider : WizardTemplateProvider() {
+    /**
+     * 파일 템플릿 리스트 반환
+     *
+     * @return 커스텀한 파일 템플릿
+     */
     override fun getTemplates(): List<Template> {
         return listOf(fileTemplate)
     }
@@ -72,7 +77,7 @@ class GenerateFileTemplateProvider : WizardTemplateProvider() {
      * @param srcDir 소스 디렉토리
      * @param packageName 패키지 명
      * @param prefix 입력받은 접두사
-     * @return
+     * @return 사용자 행동에 따른 파일
      */
     private fun RecipeExecutor.generateFile(srcDir: File, packageName: String, prefix: StringParameter): MutableList<File> {
         val createdFiles = mutableListOf<File>()
