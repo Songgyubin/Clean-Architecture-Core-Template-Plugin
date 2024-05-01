@@ -54,4 +54,10 @@ object Parameters {
         default = false
         help = "Entity 데이터 클래스를 생성하시겠습니까?"
     }
+
+    val generateInject = booleanParameter {
+        name = "Apply Hilt"
+        default = false
+        help = "Hilt를 적용하시겠습니까?"
+    }
 }

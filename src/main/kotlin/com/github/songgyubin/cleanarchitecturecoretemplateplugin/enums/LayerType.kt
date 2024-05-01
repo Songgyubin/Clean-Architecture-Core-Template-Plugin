@@ -8,5 +8,6 @@ package com.github.songgyubin.cleanarchitecturecoretemplateplugin.enums
  */
 enum class LayerType(val displayName: String) {
     DATA("Data Layer"),
-    DOMAIN("Domain Layer")
+    DOMAIN("Domain Layer"),
+    HILT("Apply Hilt")
 }

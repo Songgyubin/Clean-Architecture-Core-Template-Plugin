@@ -6,21 +6,28 @@ import com.android.tools.idea.wizard.template.FormFactor
 import com.android.tools.idea.wizard.template.LabelWidget
 import com.android.tools.idea.wizard.template.ModuleTemplateData
 import com.android.tools.idea.wizard.template.RecipeExecutor
-import com.android.tools.idea.wizard.template.StringParameter
 import com.android.tools.idea.wizard.template.Template
 import com.android.tools.idea.wizard.template.TemplateData
 import com.android.tools.idea.wizard.template.TextFieldWidget
 import com.android.tools.idea.wizard.template.WizardTemplateProvider
 import com.android.tools.idea.wizard.template.WizardUiContext
 import com.android.tools.idea.wizard.template.template
-import com.github.songgyubin.cleanarchitecturecoretemplateplugin.enums.LayerType
 import com.github.songgyubin.cleanarchitecturecoretemplateplugin.constant.Parameters.generateDataSource
 import com.github.songgyubin.cleanarchitecturecoretemplateplugin.constant.Parameters.generateEntity
+import com.github.songgyubin.cleanarchitecturecoretemplateplugin.constant.Parameters.generateInject
 import com.github.songgyubin.cleanarchitecturecoretemplateplugin.constant.Parameters.generateModel
 import com.github.songgyubin.cleanarchitecturecoretemplateplugin.constant.Parameters.generateRepository
 import com.github.songgyubin.cleanarchitecturecoretemplateplugin.constant.Parameters.generateRepositoryImpl
 import com.github.songgyubin.cleanarchitecturecoretemplateplugin.constant.Parameters.generateUseCase
 import com.github.songgyubin.cleanarchitecturecoretemplateplugin.constant.Parameters.prefix
+import com.github.songgyubin.cleanarchitecturecoretemplateplugin.content.FileCategory.DTO
+import com.github.songgyubin.cleanarchitecturecoretemplateplugin.content.FileCategory.DataSource
+import com.github.songgyubin.cleanarchitecturecoretemplateplugin.content.FileCategory.Entity
+import com.github.songgyubin.cleanarchitecturecoretemplateplugin.content.FileCategory.Repository
+import com.github.songgyubin.cleanarchitecturecoretemplateplugin.content.FileCategory.RepositoryImpl
+import com.github.songgyubin.cleanarchitecturecoretemplateplugin.content.FileCategory.UseCase
+import com.github.songgyubin.cleanarchitecturecoretemplateplugin.content.FileContentFactory.createFileContent
+import com.github.songgyubin.cleanarchitecturecoretemplateplugin.enums.LayerType
 import java.io.File
 
 /**
@@ -30,6 +37,11 @@ import java.io.File
  * @created  2024/04/11
  */
 class GenerateFileTemplateProvider : WizardTemplateProvider() {
+    /**
+     * 파일 템플릿 리스트 반환
+     *
+     * @return 커스텀한 파일 템플릿
+     */
     override fun getTemplates(): List<Template> {
         return listOf(fileTemplate)
     }
@@ -48,7 +60,7 @@ class GenerateFileTemplateProvider : WizardTemplateProvider() {
                 val srcDir = moduleData.srcDir
                 val packageName = moduleData.packageName
 
-                val createdFiles = generateFile(srcDir, packageName, prefix)
+                val createdFiles = generateFile(srcDir, packageName, prefix.value)
 
                 createdFiles.forEach { file -> open(file) }
             }
@@ -63,6 +75,8 @@ class GenerateFileTemplateProvider : WizardTemplateProvider() {
                 CheckBoxWidget(generateRepositoryImpl),
                 CheckBoxWidget(generateDataSource),
                 CheckBoxWidget(generateModel),
+                LabelWidget(LayerType.HILT.displayName),
+                CheckBoxWidget(generateInject)
             )
         }
 
@@ -72,18 +86,19 @@ class GenerateFileTemplateProvider : WizardTemplateProvider() {
      * @param srcDir 소스 디렉토리
      * @param packageName 패키지 명
      * @param prefix 입력받은 접두사
-     * @return
+     * @return 사용자 행동에 따른 파일
      */
-    private fun RecipeExecutor.generateFile(srcDir: File, packageName: String, prefix: StringParameter): MutableList<File> {
+    private fun RecipeExecutor.generateFile(srcDir: File, packageName: String, prefix: String): MutableList<File> {
         val createdFiles = mutableListOf<File>()
+        val isApplyHilt = generateInject.value
 
         val fileDetails = listOf(
-            Triple(generateRepositoryImpl, "${prefix.value}RepositoryImpl.kt", "class ${prefix.value}RepositoryImpl: ${prefix.value}Repository"),
-            Triple(generateDataSource, "${prefix.value}DataSource.kt", "class ${prefix.value}DataSource"),
-            Triple(generateModel, "${prefix.value}.kt", "data class ${prefix.value}()"),
-            Triple(generateRepository, "${prefix.value}Repository.kt", "interface ${prefix.value}Repository"),
-            Triple(generateUseCase, "${prefix.value}UseCase.kt", "class ${prefix.value}UseCase"),
-            Triple(generateEntity, "${prefix.value}Entity.kt", "data class ${prefix.value}Entity()")
+            Triple(generateRepositoryImpl, "${prefix}RepositoryImpl.kt", createFileContent(RepositoryImpl, isApplyHilt = isApplyHilt, prefix = prefix)),
+            Triple(generateDataSource, "${prefix}DataSource.kt", createFileContent(DataSource, isApplyHilt = isApplyHilt, prefix = prefix)),
+            Triple(generateModel, "${prefix}.kt", createFileContent(DTO, isApplyHilt = isApplyHilt, prefix = prefix)),
+            Triple(generateRepository, "${prefix}Repository.kt", createFileContent(Repository, isApplyHilt = isApplyHilt, prefix = prefix)),
+            Triple(generateUseCase, "${prefix}UseCase.kt", createFileContent(UseCase, isApplyHilt = isApplyHilt, prefix = prefix)),
+            Triple(generateEntity, "${prefix}Entity.kt", createFileContent(Entity, isApplyHilt = isApplyHilt, prefix = prefix))
         )
 
         fileDetails.forEach { (condition, fileName, content) ->
